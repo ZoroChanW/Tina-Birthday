@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17152b">
+  <meta name="description" content="یه سورپرایز کوچیک تولد برای تینا">
+  <title>عملیات تولد تینا 🎉</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+
+    :root {
+      color-scheme: dark;
+      --bg: #17152b;
+      --panel: #24213d;
+      --panel2: #2d2949;
+      --ink: #fff9ec;
+      --muted: #c2bfd6;
+      --yellow: #ffd166;
+      --orange: #ff8c42;
+      --mint: #7ce6c2;
+      --blue: #78c8ff;
+      --line: rgba(255,255,255,.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { min-height: 100%; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: max(18px, env(safe-area-inset-top)) 14px max(26px, env(safe-area-inset-bottom));
+      display: grid;
+      place-items: center;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 12% 12%, rgba(120,200,255,.14), transparent 28rem),
+        radial-gradient(ellipse at 90% 82%, rgba(255,140,66,.13), transparent 26rem),
+        var(--bg);
+      color: var(--ink);
+      font-family: "Vazirmatn", Tahoma, sans-serif;
+    }
+
+    button { font: inherit; }
+    .page { width: min(100%, 560px); position: relative; z-index: 1; }
+    .topline {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      margin: 0 auto 14px; color: var(--muted); font-size: .78rem; font-weight: 700;
+      letter-spacing: .01em;
+    }
+    .live-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--mint);
+      box-shadow: 0 0 0 5px rgba(124,230,194,.12);
+    }
+    .card {
+      position: relative; overflow: hidden;
+      padding: 26px 20px 22px;
+      border: 1px solid var(--line); border-radius: 28px;
+      background: linear-gradient(155deg, rgba(45,41,73,.96), rgba(31,29,54,.97));
+      box-shadow: 0 24px 80px rgba(0,0,0,.32);
+      text-align: center;
+    }
+    .card::before, .card::after {
+      content: ""; position: absolute; width: 150px; height: 150px; border-radius: 50%;
+      filter: blur(1px); pointer-events: none; opacity: .15;
+    }
+    .card::before { background: var(--yellow); top: -105px; right: -70px; }
+    .card::after { background: var(--blue); bottom: -115px; left: -85px; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 12px; border-radius: 99px;
+      color: var(--yellow); background: rgba(255,209,102,.10);
+      border: 1px solid rgba(255,209,102,.22);
+      font-size: .76rem; font-weight: 800;
+    }
+    h1 {
+      margin: 14px 0 5px; font-size: clamp(2rem, 9vw, 3.25rem);
+      line-height: 1.32; font-weight: 900; letter-spacing: -.04em;
+    }
+    h1 .name { color: var(--yellow); text-shadow: 0 5px 25px rgba(255,209,102,.13); }
+    .subtitle { margin: 7px 0 0; color: var(--muted); font-size: .95rem; line-height: 1.9; }
+    .art-wrap {
+      width: min(100%, 340px); margin: 12px auto 8px; position: relative;
+      animation: floaty 4.2s ease-in-out infinite;
+    }
+    .art-wrap svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .spark { transform-box: fill-box; transform-origin: center; animation: twinkle 2.2s ease-in-out infinite alternate; }
+    .spark.s2 { animation-delay: .7s; }
+    .spark.s3 { animation-delay: 1.2s; }
+    .balloon { transform-box: fill-box; transform-origin: bottom center; animation: sway 3s ease-in-out infinite alternate; }
+    .balloon.b2 { animation-delay: -.9s; }
+    .flame { transform-box: fill-box; transform-origin: center bottom; animation: flicker .7s ease-in-out infinite alternate; }
+    @keyframes floaty { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-7px) } }
+    @keyframes twinkle { from { opacity: .42; transform: scale(.78) rotate(-10deg) } to { opacity: 1; transform: scale(1.12) rotate(12deg) } }
+    @keyframes sway { from { transform: rotate(-5deg) } to { transform: rotate(5deg) } }
+    @keyframes flicker { from { transform: scale(.9,1) rotate(-3deg) } to { transform: scale(1.08,.9) rotate(4deg) } }
+
+    .status {
+      margin: 2px auto 18px; width: fit-content; max-width: 100%;
+      padding: 8px 13px; border-radius: 12px; background: rgba(124,230,194,.09);
+      border: 1px dashed rgba(124,230,194,.35); color: var(--mint);
+      font-size: .78rem; font-weight: 700;
+    }
+    .primary {
+      width: 100%; min-height: 54px; border: 0; border-radius: 16px;
+      padding: 13px 18px; display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      color: #211b2e; background: linear-gradient(100deg, var(--yellow), #ffb65e);
+      box-shadow: 0 9px 26px rgba(255,177,83,.18);
+      font-weight: 900; font-size: 1rem; cursor: pointer;
+      touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+      transition: transform .16s ease, filter .16s ease;
+    }
+    .primary:active { transform: scale(.98); filter: brightness(.96); }
+    .primary:focus-visible, .secondary:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    .secondary {
+      min-height: 48px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 14px;
+      color: var(--ink); background: rgba(255,255,255,.06); font-weight: 800;
+      cursor: pointer; touch-action: manipulation;
+    }
+    .message {
+      margin-top: 18px; padding: 19px 17px 17px; border-radius: 19px;
+      text-align: right; background: rgba(18,17,34,.7);
+      border: 1px solid rgba(255,255,255,.09);
+      animation: reveal .45s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .message[hidden] { display: none; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(12px) scale(.985) } to { opacity: 1; transform: none } }
+    .message h2 { margin: 0 0 10px; color: var(--mint); font-size: 1.12rem; }
+    .message p { margin: 0 0 11px; color: #eeeaf8; line-height: 2.05; font-size: .94rem; }
+    .message p:last-of-type { margin-bottom: 0; }
+    .signoff { margin-top: 12px; color: var(--yellow); font-weight: 800; }
+    .after { display: grid; gap: 10px; margin-top: 15px; }
+    .after[hidden] { display: none; }
+    .footnote { margin: 18px 0 0; color: #aaa6c1; font-size: .72rem; line-height: 1.8; }
+    .footnote b { color: #d9d5e8; }
+
+    .confetti {
+      position: fixed; z-index: 5; top: -16px; width: 9px; height: 13px;
+      border-radius: 3px; pointer-events: none;
+      animation: drop var(--dur, 2.8s) linear forwards;
+    }
+    @keyframes drop {
+      to { transform: translate3d(var(--drift, 30px), 110vh, 0) rotate(var(--spin, 650deg)); opacity: .2; }
+    }
+    .toast {
+      position: fixed; z-index: 8; left: 50%; bottom: max(18px, env(safe-area-inset-bottom));
+      transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+      width: max-content; max-width: calc(100vw - 32px); padding: 11px 16px;
+      border: 1px solid var(--line); border-radius: 99px; background: #302b49;
+      color: var(--ink); font-size: .85rem; font-weight: 700; text-align: center;
+      transition: .25s ease;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (min-width: 600px) {
+      body { padding: 30px 20px; }
+      .card { padding: 32px 34px 26px; }
+      .art-wrap { width: 350px; }
+    }
+    @media (max-width: 380px) {
+      .card { padding: 22px 15px 18px; border-radius: 23px; }
+      .subtitle { font-size: .88rem; }
+      .message { padding: 16px 14px; }
+      .message p { font-size: .9rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topline"><span class="live-dot"></span> سیستم جشن فعال است  </div>
+
+    <section class="card" aria-labelledby="title">
+      <div class="tag">🎮 مأموریت ویژه: تولد</div>
+      <h1 id="title"><span class="name">تینا</span>، تولدت مبارک!</h1>
+      <p class="subtitle">امیدوارم اوکی باشه<br>عذاب وجدانم اجازه نداد برا همین💀</p>
+
+      <div class="art-wrap" aria-label="تصویر کارتونی کیک تولد و بادکنک‌ها">
+        <svg viewBox="0 0 360 250" role="img" aria-hidden="true">
+          <defs>
+            <linearGradient id="cakeTop" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fff0ae"/><stop offset="1" stop-color="#ffc96b"/>
+            </linearGradient>
+            <linearGradient id="cakeSide" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ff9b79"/><stop offset="1" stop-color="#e86b78"/>
+            </linearGradient>
+            <linearGradient id="gift" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#8de9ce"/><stop offset="1" stop-color="#42bca7"/>
+            </linearGradient>
+          </defs>
+
+          <!-- confetti sparks -->
+          <g fill="#ffd166">
+            <path class="spark" d="M53 51l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/>
+            <path class="spark s2" d="M302 48l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>
+            <circle class="spark s3" cx="78" cy="145" r="4"/>
+            <circle class="spark" cx="289" cy="151" r="4"/>
+          </g>
+          <g fill="#78c8ff">
+            <path class="spark s2" d="M105 35l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/>
+            <circle class="spark s3" cx="257" cy="86" r="4"/>
+          </g>
+
+          <!-- balloon strings and balloons -->
+          <g class="balloon">
+            <path d="M64 115 Q77 148 113 175" fill="none" stroke="#b9b4d0" stroke-width="1.8"/>
+            <ellipse cx="57" cy="82" rx="23" ry="30" fill="#ff8c42"/>
+            <path d="M54 111l3 8 4-8" fill="#ff8c42"/>
+            <ellipse cx="49" cy="70" rx="6" ry="12" fill="#ffffff" opacity=".22" transform="rotate(25 49 70)"/>
+          </g>
+          <g class="balloon b2">
+            <path d="M297 108 Q285 145 251 173" fill="none" stroke="#b9b4d0" stroke-width="1.8"/>
+            <ellipse cx="305" cy="76" rx="22" ry="29" fill="#78c8ff"/>
+            <path d="M302 105l3 8 4-8" fill="#78c8ff"/>
+            <ellipse cx="297" cy="65" rx="5" ry="11" fill="#ffffff" opacity=".25" transform="rotate(25 297 65)"/>
+          </g>
+
+          <!-- cake shadow -->
+          <ellipse cx="181" cy="211" rx="102" ry="15" fill="#0c0b18" opacity=".35"/>
+          <!-- cake plate -->
+          <path d="M83 193 Q180 218 277 193 L267 211 Q180 232 93 211Z" fill="#78c8ff"/>
+          <ellipse cx="180" cy="193" rx="97" ry="17" fill="#a9ddff"/>
+          <!-- cake body -->
+          <path d="M105 139 Q180 124 255 139 L249 190 Q180 211 111 190Z" fill="url(#cakeSide)"/>
+          <ellipse cx="180" cy="139" rx="75" ry="19" fill="url(#cakeTop)"/>
+          <path d="M106 148 Q124 157 139 148 Q155 139 170 150 Q185 160 200 149 Q219 138 234 149 Q245 155 254 147" fill="none" stroke="#fff4d2" stroke-width="6" stroke-linecap="round"/>
+          <g fill="#fff0b7">
+            <circle cx="133" cy="174" r="4"/><circle cx="177" cy="184" r="4"/><circle cx="222" cy="170" r="4"/>
+          </g>
+          <!-- candles -->
+          <g>
+            <rect x="146" y="103" width="10" height="28" rx="4" fill="#78c8ff"/>
+            <rect x="175" y="96" width="10" height="33" rx="4" fill="#7ce6c2"/>
+            <rect x="204" y="103" width="10" height="28" rx="4" fill="#ff8c42"/>
+            <path class="flame" d="M151 98 C139 87 151 77 153 69 C164 82 165 91 151 98Z" fill="#ffd166"/>
+            <path class="flame" d="M180 91 C168 80 180 69 182 60 C193 74 194 83 180 91Z" fill="#ffd166"/>
+            <path class="flame" d="M209 98 C197 87 209 77 211 69 C222 82 223 91 209 98Z" fill="#ffd166"/>
+          </g>
+          <!-- tiny gift -->
+          <g transform="translate(262 169)">
+            <rect x="0" y="12" width="38" height="30" rx="5" fill="url(#gift)"/>
+            <rect x="-3" y="8" width="44" height="10" rx="4" fill="#a3f1d8"/>
+            <rect x="16" y="8" width="7" height="34" fill="#fff0ae"/>
+            <path d="M19 9 C-1 -7 1 -14 11 -11 C19 -8 19 2 19 9Z" fill="#ffd166"/>
+            <path d="M20 9 C39 -8 39 -15 29 -12 C21 -9 20 2 20 9Z" fill="#ff8c42"/>
+          </g>
+        </svg>
+      </div>
+
+      
+      <button class="primary" id="openBtn" type="button">باز کردن نامه تولد🤺</button>
+
+      <section class="message" id="message" aria-live="polite" hidden>
+        <h2>تولدهههه</h2>
+        <p>
+          تینا! تولدت مبارک! 🥳<br>
+         تبریک میگم تونستی یه سال دیگه توی نایت مر مود ایران دوم بیاری.💀
+        </p>
+        <p>
+          امیدوارم سال جدیدت پر از اتفاقای خوب، خنده‌های از ته دل،
+          خبرهای خوش و کلی خاطره‌ی خفن باشه.
+          همیشه حالت خوب باشه و هرچی می‌خوای یکی‌یکی جور بشه.
+        </p>
+        <p><b>宴だァーー!!!</b> 🎂</p>
+        <div class="signoff">— از طرف علیرضا 👋</div>
+      </section>
+
+      <div class="after" id="after" hidden>
+        <button class="primary" id="blowBtn" type="button">حالا شمع‌ها رو خاموش کن! 💨</button>
+        <button class="secondary" id="againBtn" type="button">یه بار دیگه جشن بگیریم 🎊</button>
+      </div>
+
+      <p class="footnote">این سایت با <b>کمی عجله و چند خط کد</b> ساخته شده؛<br></p>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const openBtn = document.getElementById('openBtn');
+    const message = document.getElementById('message');
+    const after = document.getElementById('after');
+    const blowBtn = document.getElementById('blowBtn');
+    const toast = document.getElementById('toast');
+    let toastTimer;
+
+    function celebrate(count = 65) {
+      const colors = ['#ffd166', '#ff8c42', '#7ce6c2', '#78c8ff', '#ff7892', '#eee8ff'];
+      for (let i = 0; i < count; i++) {
+        const piece = document.createElement('i');
+        piece.className = 'confetti';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.setProperty('--dur', (2.2 + Math.random() * 1.8) + 's');
+        piece.style.setProperty('--drift', (Math.random() * 180 - 90) + 'px');
+        piece.style.setProperty('--spin', (Math.random() * 900 + 300) + 'deg');
+        piece.style.animationDelay = (Math.random() * .45) + 's';
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 4700);
+      }
+    }
+
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    openBtn.addEventListener('click', () => {
+      message.hidden = false;
+      after.hidden = false;
+      openBtn.textContent = 'پیام با موفقیت دریافت شد ✅';
+      openBtn.disabled = true;
+      openBtn.style.opacity = '.72';
+      celebrate(55);
+      message.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    blowBtn.addEventListener('click', () => {
+      document.querySelectorAll('.flame').forEach(flame => flame.style.opacity = '0');
+      blowBtn.textContent = 'شمع‌ها خاموش شدند! ✅';
+      blowBtn.disabled = true;
+      celebrate(90);
+      showToast('درخواست یک برش کیک با موفقیت ثبت شد. 🍰');
+    });
+
+    document.getElementById('againBtn').addEventListener('click', () => {
+      document.querySelectorAll('.flame').forEach(flame => flame.style.opacity = '1');
+      blowBtn.textContent = 'حالا شمع‌ها رو خاموش کن! 💨';
+      blowBtn.disabled = false;
+      celebrate(75);
+      showToast('جشن دوباره شروع شد! 🎉');
+    });
+  </script>
+</body>
+</html>
